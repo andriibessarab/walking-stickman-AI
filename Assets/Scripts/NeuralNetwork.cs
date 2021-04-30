@@ -89,7 +89,7 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
         List<float[][]> weightsList = new List<float[][]>(); // weightsList(will be converted into weights)
 
         // Iterate over all neurons that have weight connection
-        for(int i = 0; i < layers.Length; i++)
+        for(int i = 1; i < layers.Length; i++)
         {
             List<float[]> layerWeightsList = new List<float[]>(); // layerWeightList for current layer(will be converted into 2D array)
 
