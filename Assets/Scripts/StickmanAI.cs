@@ -7,8 +7,33 @@ public class StickmanAI : MonoBehaviour {
 
     private NeuralNetwork net; // neural network
 
+    private float speed; // speed
+
+    // Body parts
+    public Transform torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
+    Rigidbody2D torsoRB, lowerTorsoRB, leftLegRB, rightLegRB, leftKneeRB, rightKneeRB;
+    HingeJoint2D torsoJoint,lowerTorsoJoint, leftLegJoint, rightLegJoint, leftKneeJoint, rightKneeJoint;
+    JointMotor2D leftLegMotor, leftKneeMotor, rightLegMotor, rightKneeMotor, torsoMotor;
+
     void Start()
     {
+        speed = 60f; // speed
+
+        // Rigidbody2D
+        torsoRB = torso.GetComponent<Rigidbody2D>();
+        lowerTorsoRB = lowerTorso.GetComponent<Rigidbody2D>();
+        leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
+        rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
+        leftKneeRB = leftKnee.GetComponent<Rigidbody2D>();
+        rightKneeRB = rightKnee.GetComponent<Rigidbody2D>();
+
+        // HingeJoint2D
+        torsoJoint = torso.GetComponent<HingeJoint2D>();
+        lowerTorsoJoint = lowerTorso.GetComponent<HingeJoint2D>();
+        leftLegJoint = leftLeg.GetComponent<HingeJoint2D>();
+        rightLegJoint = rightLeg.GetComponent<HingeJoint2D>();
+        leftKneeJoint = leftKnee.GetComponent<HingeJoint2D>();
+        rightKneeJoint = rightKnee.GetComponent<HingeJoint2D>();
     }
 
     void FixedUpdate ()
@@ -16,6 +41,64 @@ public class StickmanAI : MonoBehaviour {
         // Do script if initialized
         if (initilized == true)
         {
+            // Angles
+            float torsoAngle = torso.transform.rotation.eulerAngles.z;
+            float lowerTorsoAngle = lowerTorso.transform.rotation.eulerAngles.z;
+            float leftLegAngle = leftLeg.transform.rotation.eulerAngles.z;
+            float rightLegAngle = rightLeg.transform.rotation.eulerAngles.z;
+            float leftKneeAngle = leftKnee.transform.rotation.eulerAngles.z;
+            float rightKneeAngle = rightKnee.transform.rotation.eulerAngles.z;
+
+            // AngularVelocity
+            float torsoAV = torsoRB.angularVelocity;
+            float leftLegAV  = leftLegRB.angularVelocity;
+            float rightLegAV  = rightLegRB.angularVelocity;
+
+            // Height
+            float height = torso.position.y + 1.7f;
+            if (height < -1) height = -1;
+            if (height > 1) height = 1;
+
+            // Handle inputs
+            float[] inputs = new float[10]{ torsoAngle, lowerTorsoAngle, leftLegAngle, rightLegAngle, leftKneeAngle, rightKneeAngle, torsoAV, leftLegAV, rightLegAV, height };
+
+            // Handle outputs
+            float[] outputs = net.FeedForward(inputs);
+
+            // Speed
+            float leftLegSpeed = outputs[0];
+            float leftKneeSpeed = outputs[1];
+            float rightLegSpeed = outputs[2];
+            float rightKneeSpeed = outputs[3];
+            float torsoSpeed = outputs[4];
+
+            // Add torque to torso
+            torsoRB.AddTorque(torsoSpeed * 2000 * Time.fixedDeltaTime);
+
+            // Motors
+            JointMotor2D leftLegMotor = leftLegJoint.motor;
+            leftLegMotor.motorSpeed = leftLegSpeed * speed;
+            leftLegJoint.motor = leftLegMotor;
+
+            JointMotor2D leftKneeMotor = leftKneeJoint.motor;
+            leftKneeMotor.motorSpeed = leftKneeSpeed * speed;
+            leftKneeJoint.motor = leftKneeMotor;
+
+            JointMotor2D rightLegMotor = rightLegJoint.motor;
+            rightLegMotor.motorSpeed = rightLegSpeed * speed;
+            rightLegJoint.motor = rightLegMotor;
+
+            JointMotor2D rightKneeMotor = rightKneeJoint.motor;
+            rightKneeMotor.motorSpeed = rightKneeSpeed * speed;
+            rightKneeJoint.motor = rightKneeMotor;
+
+            JointMotor2D torsoMotor = torsoJoint.motor;
+            torsoMotor.motorSpeed = torsoSpeed * speed;
+            torsoJoint.motor = torsoMotor;
+
+            // Handle fitness
+            net.SetFitness(transform.position.x);
+
         }
 	}
 

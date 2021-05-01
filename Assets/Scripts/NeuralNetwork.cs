@@ -130,11 +130,11 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
         }
 
         // Itterate over all neurons and compute feedforward values
-        for (int i = 1; i < inputs.Length; i++)
+        for (int i = 1; i < layers.Length; i++)
         {
             for (int j = 0; j < neurons[i].Length; j++)
             {
-                float value = 0.25f;
+                float value = 0f;
 
                 for (int k = 0; k < neurons[i - 1].Length; k++)
                 {
@@ -162,34 +162,35 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
                     float weight = weights[i][j][k];
 
                     //Mutate current weight's value
-                    float randomNumber = UnityEngine.Random.Range(0f, 1000f);
+                    float randomNumber = UnityEngine.Random.Range(0f, 10f);
 
-                    if (randomNumber <= 2f) // Case 1 - Flip sign of weight
+                    if (randomNumber <= 1f) // Case 1 - Flip sign of weight
                     {
                         weight *= -1f;
+                        UnityEngine.Debug.Log(1);
                     }
                     else if (randomNumber <= 2f) // Case 2 - Pick random weight between -1 and 1
                     {
                         weight = UnityEngine.Random.Range(-0.5f, 0.5f);
+                        UnityEngine.Debug.Log(2);
                     }
-                    else if (randomNumber <= 2f) // Case 3 - Randomly increase by 0% to 100%
+                    else if (randomNumber <= 3f) // Case 3 - Randomly increase by 0% to 100%
                     {
                         weight *= UnityEngine.Random.Range(0f, 1f) +1f;
+                        UnityEngine.Debug.Log(3);
                     }
-                    else if (randomNumber <= 2f) // Case 4 - Random;y decrease by 0% to 100%
+                    else if (randomNumber <= 4f) // Case 4 - Random;y decrease by 0% to 100%
                     {
                         weight *= UnityEngine.Random.Range(0f, 1f);
+                        UnityEngine.Debug.Log(4);
                     }
+
+                    UnityEngine.Debug.Log("yes");
 
                     weights[i][j][k] = weight;
                 }
             }
         }
-    }
-
-    public void AddFitness(float fit)
-    {
-        fitness += fit;
     }
 
     public void SetFitness(float fit)
