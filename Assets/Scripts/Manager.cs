@@ -5,11 +5,14 @@ using UnityEngine;
 public class Manager : MonoBehaviour {
 
     public GameObject stickmanPrefab; // stickman game object
+    public GameObject statsCanvas; // game object with update stats funcs
+
     public int populationSize; // num of stickmans per generation
     public int GenerationTime; // time after which generation resets
 
     private bool isTraning = false;
     private int generationNumber = 0;
+    private int nextID = 1;
     private List<StickmanAI> stickmanList = null;
 
     private List<NeuralNetwork> nets;
@@ -21,7 +24,7 @@ public class Manager : MonoBehaviour {
     }
 
 
-	void Update ()
+	void Update()
     {
         if (isTraning == false)
         {
@@ -45,18 +48,25 @@ public class Manager : MonoBehaviour {
                 for (int i = 0; i < populationSize; i++)
                 {
                     nets[i].SetFitness(0f);
+                    nets[i].SetID(nextID); // update net's ID
+
+                    nextID++; // increment nextID
                 }
             }
 
             generationNumber++; // increment generation by 1
+            statsCanvas.GetComponent<UpdateStats>().UpdateGenerationNumberText(generationNumber); // update gen num stat
             
             // Start training session
             isTraning = true;
             Invoke("Timer", GenerationTime); // set timer
             CreateStickmans(); // create stickmans
         }
+        else
+        {
+            statsCanvas.GetComponent<UpdateStats>().UpdateTop10ListText(nets); // update top10  stat
+        }
     }
-
 
     private void CreateStickmans()
     {
@@ -87,7 +97,7 @@ public class Manager : MonoBehaviour {
         // Make sure population is even
         if (populationSize % 2 != 0)
         {
-            populationSize = 20; 
+            populationSize += 1; 
         }
 
         nets = new List<NeuralNetwork>(); // define nets list
@@ -97,7 +107,10 @@ public class Manager : MonoBehaviour {
         {
             NeuralNetwork net = new NeuralNetwork(layers);
             net.Mutate(); // mutate neural network
-            nets.Add(net);
+            net.SetID(nextID); // set net's ID
+            nets.Add(net); // add this net to list
+
+            nextID++; // increment nextID
         }
     }
 }

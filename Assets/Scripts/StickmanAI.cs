@@ -10,7 +10,7 @@ public class StickmanAI : MonoBehaviour {
     private float speed; // speed
 
     // Body parts
-    public Transform torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
+    public Transform head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
     Rigidbody2D torsoRB, lowerTorsoRB, leftLegRB, rightLegRB, leftKneeRB, rightKneeRB;
     HingeJoint2D torsoJoint,lowerTorsoJoint, leftLegJoint, rightLegJoint, leftKneeJoint, rightKneeJoint;
     JointMotor2D leftLegMotor, leftKneeMotor, rightLegMotor, rightKneeMotor, torsoMotor;
@@ -97,7 +97,7 @@ public class StickmanAI : MonoBehaviour {
             torsoJoint.motor = torsoMotor;
 
             // Handle fitness
-            net.SetFitness(transform.position.x);
+            net.SetFitness(head.transform.position.x);
 
         }
 	}

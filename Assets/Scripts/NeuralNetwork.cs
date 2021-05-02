@@ -11,6 +11,7 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
     private float[][] neurons; // neuron matrix
     private float[][][] weights; // weight matrix
     private float fitness; // fitness of the network
+    private int ID; // network's ID
 
     /// <summary>
     /// Initialize neural network with random weights
@@ -167,30 +168,34 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
                     if (randomNumber <= 1f) // Case 1 - Flip sign of weight
                     {
                         weight *= -1f;
-                        UnityEngine.Debug.Log(1);
                     }
                     else if (randomNumber <= 2f) // Case 2 - Pick random weight between -1 and 1
                     {
                         weight = UnityEngine.Random.Range(-0.5f, 0.5f);
-                        UnityEngine.Debug.Log(2);
                     }
                     else if (randomNumber <= 3f) // Case 3 - Randomly increase by 0% to 100%
                     {
                         weight *= UnityEngine.Random.Range(0f, 1f) +1f;
-                        UnityEngine.Debug.Log(3);
                     }
                     else if (randomNumber <= 4f) // Case 4 - Random;y decrease by 0% to 100%
                     {
                         weight *= UnityEngine.Random.Range(0f, 1f);
-                        UnityEngine.Debug.Log(4);
                     }
-
-                    UnityEngine.Debug.Log("yes");
 
                     weights[i][j][k] = weight;
                 }
             }
         }
+    }
+
+    public void SetID(int newID)
+    {
+        ID = newID;
+    }
+    
+    public int GetID()
+    {
+        return ID;
     }
 
     public void SetFitness(float fit)

@@ -951,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c09fc911b614b799d8795b805c7d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 6328179450856280783}
   torso: {fileID: 6328179452040989234}
   lowerTorso: {fileID: 6328179450124340326}
   leftLeg: {fileID: 6328179451041643321}
