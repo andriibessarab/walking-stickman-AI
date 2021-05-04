@@ -9,14 +9,27 @@ public class StickmanAI : MonoBehaviour {
 
     private float speed; // speed
 
+    private GameObject manager; // manager game object
+
     // Body parts
     public Transform head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
-    Rigidbody2D torsoRB, lowerTorsoRB, leftLegRB, rightLegRB, leftKneeRB, rightKneeRB;
-    HingeJoint2D torsoJoint,lowerTorsoJoint, leftLegJoint, rightLegJoint, leftKneeJoint, rightKneeJoint;
-    JointMotor2D leftLegMotor, leftKneeMotor, rightLegMotor, rightKneeMotor, torsoMotor;
+    Rigidbody2D torsoRB, lowerTorsoRB, leftLegRB, rightLegRB, leftKneeRB, rightKneeRB; // body parts' rigid bodys
+    HingeJoint2D torsoJoint,lowerTorsoJoint, leftLegJoint, rightLegJoint, leftKneeJoint, rightKneeJoint; // body parts' joints
 
     void Start()
     {
+        Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        // Color body parts
+        head.GetComponent<Renderer>().material.color = color;
+        torso.GetComponent<Renderer>().material.color = color;
+        lowerTorso.GetComponent<Renderer>().material.color = color;
+        leftLeg.GetComponent<Renderer>().material.color = color;
+        rightLeg.GetComponent<Renderer>().material.color = color;
+        leftKnee.GetComponent<Renderer>().material.color = color;
+        rightKnee.GetComponent<Renderer>().material.color = color;
+
+        manager = GameObject.FindWithTag("Manager");
         speed = 60f; // speed
 
         // Rigidbody2D
@@ -36,7 +49,7 @@ public class StickmanAI : MonoBehaviour {
         rightKneeJoint = rightKnee.GetComponent<HingeJoint2D>();
     }
 
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         // Do script if initialized
         if (initilized == true)
@@ -101,6 +114,22 @@ public class StickmanAI : MonoBehaviour {
 
         }
 	}
+
+    // If stickman fell, start next generation
+    public void Fell()
+    {
+        List<NeuralNetwork> nets = manager.GetComponent<Manager>().GetNets(); // get list of neural networks
+        
+        nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
+
+        int stickmanRank = nets.IndexOf(net); // get stickman's rank
+
+        // If stickman is top 1 and he fell - go to next generation
+        if (stickmanRank == 0)
+        {
+            manager.GetComponent<Manager>().Timer();
+        }
+    }
 
     // Initialize
     public void Init(NeuralNetwork net)

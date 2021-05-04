@@ -2523,7 +2523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -6.58, y: 2.0382}
+  m_AnchoredPosition: {x: -6.6, y: 2.07}
   m_SizeDelta: {x: 10, y: 5.7636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &687374344
@@ -3409,7 +3409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stickmanPrefab: {fileID: 6328179451365421954, guid: 6008805a0c68846cc8ed8366970dab7c, type: 3}
   statsCanvas: {fileID: 686180176}
-  populationSize: 10
+  populationSize: 20
   GenerationTime: 7
 --- !u!4 &1096778856
 Transform:

@@ -18,11 +18,10 @@ public class Manager : MonoBehaviour {
     private List<NeuralNetwork> nets;
     private int[] layers = new int[] { 10, 10, 10, 5 };
 
-    void Timer()
+    public void Timer()
     {
         isTraning = false;
     }
-
 
 	void Update()
     {
@@ -85,11 +84,10 @@ public class Manager : MonoBehaviour {
         // Ittrate over population & create stickmans
         for (int i = 0; i < populationSize; i++)
         {
-            StickmanAI currentStickman = ((GameObject)Instantiate(stickmanPrefab, new Vector3(UnityEngine.Random.Range(-10, 10), 0, 0), stickmanPrefab.transform.rotation)).GetComponent<StickmanAI>();
+            StickmanAI currentStickman = ((GameObject)Instantiate(stickmanPrefab, new Vector3(0, 0, 0), stickmanPrefab.transform.rotation)).GetComponent<StickmanAI>();
             currentStickman.Init(nets[i]);
             stickmanList.Add(currentStickman);
         }
-
     }
 
     void InitStickmanNeuralNetworks()
@@ -112,5 +110,10 @@ public class Manager : MonoBehaviour {
 
             nextID++; // increment nextID
         }
+    }
+
+    public List<NeuralNetwork> GetNets()
+    {
+        return nets;
     }
 }
