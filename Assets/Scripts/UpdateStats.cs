@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class UpdateStats : MonoBehaviour
 {
+    // Text fields to update
     public GameObject GenerationNumberText;
     public GameObject Top10ListText;
+
+    // Camera
+    public GameObject camera;
+    public Vector3 offset;
 
     public void UpdateGenerationNumberText(int generationNumber)
     {
@@ -30,5 +35,10 @@ public class UpdateStats : MonoBehaviour
             Top10ListText.GetComponent<TMPro.TextMeshProUGUI>().text += nets[i].GetID().ToString("00000") + " | fitness:" + Math.Round(nets[i].GetFitness(), 4) + "\n";
         }
 
+    }
+
+    void LateUpdate()
+    {
+        transform.position = new Vector3(camera.transform.position.x + offset.x, camera.transform.position.y + offset.y, offset.z); // follow target; // stay in camera view
     }
 }

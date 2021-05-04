@@ -629,7 +629,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -707,6 +707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -763,6 +767,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -1069,6 +1077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1229,7 +1241,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1249,6 +1261,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -1348,7 +1364,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1586,7 +1602,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1692,8 +1708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05001ddbfdceb43ae9584ee3ef0477b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  smoothSpeed: 0.125
   offset: {x: 3, y: 1, z: -10}
 --- !u!20 &519420031
 Camera:
@@ -1866,7 +1880,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1923,7 +1937,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2037,7 +2051,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2301,6 +2315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -2399,7 +2417,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2680,6 +2698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2778,7 +2800,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2850,6 +2872,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -3088,6 +3114,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -3390,7 +3420,7 @@ GameObject:
   - component: {fileID: 1096778855}
   m_Layer: 0
   m_Name: Manager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3409,7 +3439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stickmanPrefab: {fileID: 6328179451365421954, guid: 6008805a0c68846cc8ed8366970dab7c, type: 3}
   statsCanvas: {fileID: 686180176}
-  populationSize: 20
+  populationSize: 10
   GenerationTime: 7
 --- !u!4 &1096778856
 Transform:
@@ -3652,6 +3682,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -3713,6 +3747,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -4105,7 +4143,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -4286,7 +4324,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -4476,7 +4514,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -4725,6 +4763,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -5785,6 +5827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6059,7 +6105,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -6550,7 +6596,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f20e916c55c25439c9de0e69f7323327, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -6627,6 +6673,10 @@ PrefabInstance:
     - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_Name
       value: Ground_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
@@ -7305,6 +7355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013596324182, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012716184110, guid: 4f3f141ed39dd463db51de25b772da10, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -7436,7 +7490,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108436270}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -8.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

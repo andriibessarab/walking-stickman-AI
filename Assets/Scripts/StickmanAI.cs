@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class StickmanAI : MonoBehaviour {
     private bool initilized = false; // initialization state
-
     private NeuralNetwork net; // neural network
-
     private float speed; // speed
-
     private GameObject manager; // manager game object
+    private GameObject camera; // camera game object
+    private List<NeuralNetwork> nets;
 
     // Body parts
     public Transform head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
@@ -18,6 +17,12 @@ public class StickmanAI : MonoBehaviour {
 
     void Start()
     {
+        // Get game objects by tags
+        manager = GameObject.FindWithTag("Manager");
+        camera = GameObject.FindWithTag("MainCamera");
+
+        speed = 60f; // speed
+
         Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
         // Color body parts
@@ -28,9 +33,6 @@ public class StickmanAI : MonoBehaviour {
         rightLeg.GetComponent<Renderer>().material.color = color;
         leftKnee.GetComponent<Renderer>().material.color = color;
         rightKnee.GetComponent<Renderer>().material.color = color;
-
-        manager = GameObject.FindWithTag("Manager");
-        speed = 60f; // speed
 
         // Rigidbody2D
         torsoRB = torso.GetComponent<Rigidbody2D>();
@@ -112,14 +114,42 @@ public class StickmanAI : MonoBehaviour {
             // Handle fitness
             net.SetFitness(head.transform.position.x);
 
+            nets = manager.GetComponent<Manager>().GetNeuralNetworks();
+            nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
+
+            int stickmanRank = nets.IndexOf(net); // get stickman's rank
+
+            // Show only if has the best fitness
+            if (stickmanRank == 0)
+            {
+                camera.GetComponent<FollowTarget>().SetTarget(this.GetComponent<Transform>()); // set camera to follow this stickman
+
+                // Show bopdy parts
+                head.GetComponent<Renderer>().enabled = true;
+                torso.GetComponent<Renderer>().enabled = true;
+                lowerTorso.GetComponent<Renderer>().enabled = true;
+                leftLeg.GetComponent<Renderer>().enabled = true;
+                rightLeg.GetComponent<Renderer>().enabled = true;
+                leftKnee.GetComponent<Renderer>().enabled = true;
+                rightKnee.GetComponent<Renderer>().enabled = true;
+            }
+            else
+            {
+                // Hide body parts
+                head.GetComponent<Renderer>().enabled = false;
+                torso.GetComponent<Renderer>().enabled = false;
+                lowerTorso.GetComponent<Renderer>().enabled = false;
+                leftLeg.GetComponent<Renderer>().enabled = false;
+                rightLeg.GetComponent<Renderer>().enabled = false;
+                leftKnee.GetComponent<Renderer>().enabled = false;
+                rightKnee.GetComponent<Renderer>().enabled = false;
+            }
         }
 	}
 
     // If stickman fell, start next generation
     public void Fell()
     {
-        List<NeuralNetwork> nets = manager.GetComponent<Manager>().GetNets(); // get list of neural networks
-        
         nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
 
         int stickmanRank = nets.IndexOf(net); // get stickman's rank
