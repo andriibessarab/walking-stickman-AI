@@ -16,7 +16,7 @@ public class Manager : MonoBehaviour {
     private List<StickmanAI> stickmanList = null;
 
     private List<NeuralNetwork> nets;
-    private int[] layers = new int[] { 10, 10, 10, 5 };
+    private int[] layers = new int[] { 6, 10, 10, 6 };
 
     public void Timer()
     {

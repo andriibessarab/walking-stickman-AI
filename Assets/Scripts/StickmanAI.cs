@@ -3,162 +3,135 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StickmanAI : MonoBehaviour {
+
+    public GameObject head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
+
     private bool initilized = false; // initialization state
+    private Vector3 initialPosition; // initial position
+
+    public float speed = 5f; // speed
+    private Color color; // color
+
     private NeuralNetwork net; // neural network
-    private float speed; // speed
+
     private GameObject manager; // manager game object
     private GameObject camera; // camera game object
-    private List<NeuralNetwork> nets;
 
-    // Body parts
-    public Transform head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
-    Rigidbody2D torsoRB, lowerTorsoRB, leftLegRB, rightLegRB, leftKneeRB, rightKneeRB; // body parts' rigid bodys
-    HingeJoint2D torsoJoint,lowerTorsoJoint, leftLegJoint, rightLegJoint, leftKneeJoint, rightKneeJoint; // body parts' joints
+    private List<NeuralNetwork> nets; // empty list of nets
+    public List<GameObject> bodyParts = new List<GameObject>(); // list of all body parts
+    public List<GameObject> activeBodyParts = new List<GameObject>(); // list of active body parts
 
     void Start()
     {
-        // Get game objects by tags
+        // Set inital position
+        initialPosition = head.GetComponent<Transform>().position;
+
+        // Find gameobjects by tags
         manager = GameObject.FindWithTag("Manager");
         camera = GameObject.FindWithTag("MainCamera");
 
-        speed = 60f; // speed
+        // Generate random color for stickman
+        color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
-        Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        // Add active body parts to list
+        activeBodyParts.Add(torso);
+        activeBodyParts.Add(lowerTorso);
+        activeBodyParts.Add(leftLeg);
+        activeBodyParts.Add(rightLeg);
+        activeBodyParts.Add(leftKnee);
+        activeBodyParts.Add(rightKnee);
+
+        // Add all body parts to list
+        bodyParts.AddRange(activeBodyParts);
+        bodyParts.Add(head);
 
         // Color body parts
-        head.GetComponent<Renderer>().material.color = color;
-        torso.GetComponent<Renderer>().material.color = color;
-        lowerTorso.GetComponent<Renderer>().material.color = color;
-        leftLeg.GetComponent<Renderer>().material.color = color;
-        rightLeg.GetComponent<Renderer>().material.color = color;
-        leftKnee.GetComponent<Renderer>().material.color = color;
-        rightKnee.GetComponent<Renderer>().material.color = color;
-
-        // Rigidbody2D
-        torsoRB = torso.GetComponent<Rigidbody2D>();
-        lowerTorsoRB = lowerTorso.GetComponent<Rigidbody2D>();
-        leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
-        rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
-        leftKneeRB = leftKnee.GetComponent<Rigidbody2D>();
-        rightKneeRB = rightKnee.GetComponent<Rigidbody2D>();
-
-        // HingeJoint2D
-        torsoJoint = torso.GetComponent<HingeJoint2D>();
-        lowerTorsoJoint = lowerTorso.GetComponent<HingeJoint2D>();
-        leftLegJoint = leftLeg.GetComponent<HingeJoint2D>();
-        rightLegJoint = rightLeg.GetComponent<HingeJoint2D>();
-        leftKneeJoint = leftKnee.GetComponent<HingeJoint2D>();
-        rightKneeJoint = rightKnee.GetComponent<HingeJoint2D>();
+        foreach (GameObject i in bodyParts)
+        {
+            i.GetComponent<Renderer>().material.color = color;
+        }
     }
 
     void FixedUpdate()
     {
-        // Do script if initialized
+        // Do if initialized
         if (initilized == true)
         {
-            // Angles
-            float torsoAngle = torso.transform.rotation.eulerAngles.z;
-            float lowerTorsoAngle = lowerTorso.transform.rotation.eulerAngles.z;
-            float leftLegAngle = leftLeg.transform.rotation.eulerAngles.z;
-            float rightLegAngle = rightLeg.transform.rotation.eulerAngles.z;
-            float leftKneeAngle = leftKnee.transform.rotation.eulerAngles.z;
-            float rightKneeAngle = rightKnee.transform.rotation.eulerAngles.z;
+            /* Inputs:
+		    *    - distance from ground(i.o. minJointY)
+            *    - height (excluding head; i.o. maxJointY)
+		    *    - x velocity
+		    *    - y velocity
+		    *    - angular velocity
+		    *    - creature rotation
+		    */
 
-            // AngularVelocity
-            float torsoAV = torsoRB.angularVelocity;
-            float leftLegAV  = leftLegRB.angularVelocity;
-            float rightLegAV  = rightLegRB.angularVelocity;
+            // Brain inputs
+            var minJointY = activeBodyParts[0].GetComponent<HingeJoint2D>().transform.position.y;
+            var maxJointY = activeBodyParts[0].GetComponent<HingeJoint2D>().transform.position.y;
+            var velocityX = 0f;
+            var velocityY = 0f;
+            var angularVelocityZ = 0f;
+            var pointsTouchingGround = 0f;
+            var rotationZ = 0f;
 
-            // Height
-            float height = torso.position.y + 1.7f;
-            if (height < -1) height = -1;
-            if (height > 1) height = 1;
+            // Itterate over active body parts
+            foreach (GameObject i in activeBodyParts)
+            {
+                var rigidbody = i.GetComponent<Rigidbody2D>();
+                var joint = i.GetComponent<HingeJoint2D>();
+                var collider = i.GetComponent<Collider2D>();
+                var jointPos = joint.transform.position;
+
+                // Determine lowest and highest joints
+                if (jointPos.y > maxJointY)
+                    maxJointY = jointPos.y;
+                else if (jointPos.y < minJointY)
+                    minJointY = jointPos.y;
+
+                // Accumulate the velocity
+                velocityX += rigidbody.velocity.x;
+                velocityY += rigidbody.velocity.y;
+
+                // Accumulate the angular velocity
+                angularVelocityZ += rigidbody.angularVelocity;
+
+                // Accumulate the rotation angle
+                rotationZ += (rigidbody.transform.rotation.eulerAngles.z - 180f) * 0.002778f;
+            }
+
+            // Find average velocity, angular velocity, and rotation
+            velocityX /= activeBodyParts.Count;
+            velocityY /= activeBodyParts.Count;
+            angularVelocityZ /= activeBodyParts.Count;
+            rotationZ /= activeBodyParts.Count;
 
             // Handle inputs
-            float[] inputs = new float[10]{ torsoAngle, lowerTorsoAngle, leftLegAngle, rightLegAngle, leftKneeAngle, rightKneeAngle, torsoAV, leftLegAV, rightLegAV, height };
+            float[] inputs = new float[6]{ minJointY, maxJointY, velocityX, velocityY, angularVelocityZ, rotationZ };
 
             // Handle outputs
             float[] outputs = net.FeedForward(inputs);
 
-            // Speed
-            float leftLegSpeed = outputs[0];
-            float leftKneeSpeed = outputs[1];
-            float rightLegSpeed = outputs[2];
-            float rightKneeSpeed = outputs[3];
-            float torsoSpeed = outputs[4];
-
             // Add torque to torso
-            torsoRB.AddTorque(torsoSpeed * 2000 * Time.fixedDeltaTime);
+            torso.GetComponent<Rigidbody2D>().AddTorque(activeBodyParts.IndexOf(torso) * 2000 * Time.fixedDeltaTime);
 
-            // Motors
-            JointMotor2D leftLegMotor = leftLegJoint.motor;
-            leftLegMotor.motorSpeed = leftLegSpeed * speed;
-            leftLegJoint.motor = leftLegMotor;
-
-            JointMotor2D leftKneeMotor = leftKneeJoint.motor;
-            leftKneeMotor.motorSpeed = leftKneeSpeed * speed;
-            leftKneeJoint.motor = leftKneeMotor;
-
-            JointMotor2D rightLegMotor = rightLegJoint.motor;
-            rightLegMotor.motorSpeed = rightLegSpeed * speed;
-            rightLegJoint.motor = rightLegMotor;
-
-            JointMotor2D rightKneeMotor = rightKneeJoint.motor;
-            rightKneeMotor.motorSpeed = rightKneeSpeed * speed;
-            rightKneeJoint.motor = rightKneeMotor;
-
-            JointMotor2D torsoMotor = torsoJoint.motor;
-            torsoMotor.motorSpeed = torsoSpeed * speed;
-            torsoJoint.motor = torsoMotor;
+            // Itterate over active body parts and modify their moto speed
+            foreach (GameObject i in activeBodyParts) {
+                HingeJoint2D joint = i.GetComponent<HingeJoint2D>();
+                JointMotor2D motor = joint.motor;
+                motor.motorSpeed = outputs[activeBodyParts.IndexOf(i)] * speed;
+                joint.motor = motor;
+            }
 
             // Handle fitness
-            net.SetFitness(head.transform.position.x);
-
-            nets = manager.GetComponent<Manager>().GetNeuralNetworks();
-            nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
-
-            int stickmanRank = nets.IndexOf(net); // get stickman's rank
-
-            // Show only if has the best fitness
-            if (stickmanRank == 0)
-            {
-                camera.GetComponent<FollowTarget>().SetTarget(this.GetComponent<Transform>()); // set camera to follow this stickman
-
-                // Show bopdy parts
-                head.GetComponent<Renderer>().enabled = true;
-                torso.GetComponent<Renderer>().enabled = true;
-                lowerTorso.GetComponent<Renderer>().enabled = true;
-                leftLeg.GetComponent<Renderer>().enabled = true;
-                rightLeg.GetComponent<Renderer>().enabled = true;
-                leftKnee.GetComponent<Renderer>().enabled = true;
-                rightKnee.GetComponent<Renderer>().enabled = true;
-            }
-            else
-            {
-                // Hide body parts
-                head.GetComponent<Renderer>().enabled = false;
-                torso.GetComponent<Renderer>().enabled = false;
-                lowerTorso.GetComponent<Renderer>().enabled = false;
-                leftLeg.GetComponent<Renderer>().enabled = false;
-                rightLeg.GetComponent<Renderer>().enabled = false;
-                leftKnee.GetComponent<Renderer>().enabled = false;
-                rightKnee.GetComponent<Renderer>().enabled = false;
-            }
+            net.SetFitness(head.transform.position.x - initialPosition.x);
         }
 	}
 
     // If stickman fell, start next generation
     public void Fell()
     {
-        nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
-
-        int stickmanRank = nets.IndexOf(net); // get stickman's rank
-
-        // If stickman is top 1 and he fell - go to next generation
-        if (stickmanRank == 0)
-        {
-            manager.GetComponent<Manager>().Timer();
-        }
+        // TODO
     }
 
     // Initialize

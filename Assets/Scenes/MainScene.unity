@@ -2461,6 +2461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GenerationNumberText: {fileID: 201973436}
   Top10ListText: {fileID: 1111564860}
+  camera: {fileID: 519420028}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &686180178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3439,7 +3441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stickmanPrefab: {fileID: 6328179451365421954, guid: 6008805a0c68846cc8ed8366970dab7c, type: 3}
   statsCanvas: {fileID: 686180176}
-  populationSize: 10
+  populationSize: 2
   GenerationTime: 7
 --- !u!4 &1096778856
 Transform:

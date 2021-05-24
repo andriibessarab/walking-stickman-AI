@@ -163,7 +163,7 @@ public class NeuralNetwork : IComparable<NeuralNetwork>
                     float weight = weights[i][j][k];
 
                     //Mutate current weight's value
-                    float randomNumber = UnityEngine.Random.Range(0f, 10f);
+                    float randomNumber = UnityEngine.Random.Range(0f, 100f);
 
                     if (randomNumber <= 1f) // Case 1 - Flip sign of weight
                     {
