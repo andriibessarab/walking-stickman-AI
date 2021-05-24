@@ -18,8 +18,8 @@ public class StickmanAI : MonoBehaviour {
     private GameObject camera; // camera game object
 
     private List<NeuralNetwork> nets; // empty list of nets
-    public List<GameObject> bodyParts = new List<GameObject>(); // list of all body parts
-    public List<GameObject> activeBodyParts = new List<GameObject>(); // list of active body parts
+    private List<GameObject> bodyParts = new List<GameObject>(); // list of all body parts
+    private List<GameObject> activeBodyParts = new List<GameObject>(); // list of active body parts
 
     void Start()
     {
