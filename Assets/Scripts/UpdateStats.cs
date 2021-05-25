@@ -39,6 +39,6 @@ public class UpdateStats : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = new Vector3(camera.transform.position.x + offset.x, camera.transform.position.y + offset.y, offset.z); // follow target; // stay in camera view
+        transform.position = new Vector3(camera.transform.position.x + offset.x, camera.transform.position.y + offset.y, offset.z); // follow target; stay in camera view
     }
 }

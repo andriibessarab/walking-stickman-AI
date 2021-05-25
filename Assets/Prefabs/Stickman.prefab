@@ -144,8 +144,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -60
-    m_UpperAngle: 60
+    m_LowerAngle: -30
+    m_UpperAngle: 30
 --- !u!1 &2279537620327197805
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,8 +290,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -30
-    m_UpperAngle: 30
+    m_LowerAngle: -20
+    m_UpperAngle: 20
 --- !u!1 &2808618209399612214
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +436,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -30
-    m_UpperAngle: 30
+    m_LowerAngle: -20
+    m_UpperAngle: 20
 --- !u!1 &4346388246282960838
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,8 +582,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -60
-    m_UpperAngle: 60
+    m_LowerAngle: -30
+    m_UpperAngle: 30
 --- !u!1 &5850596967654995409
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +787,7 @@ MonoBehaviour:
   rightLeg: {fileID: 2279537620327197805}
   leftKnee: {fileID: 599156570312662518}
   rightKnee: {fileID: 4346388246282960838}
-  speed: 60
+  speed: 80
 --- !u!1 &7502547135934613714
 GameObject:
   m_ObjectHideFlags: 0

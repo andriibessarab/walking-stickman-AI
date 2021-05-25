@@ -1703,12 +1703,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05001ddbfdceb43ae9584ee3ef0477b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 3, y: 1, z: -10}
+  offset: {x: 3, y: 0, z: -10}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2462,7 +2462,7 @@ MonoBehaviour:
   GenerationNumberText: {fileID: 201973436}
   Top10ListText: {fileID: 1111564860}
   camera: {fileID: 519420028}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: -5.5, y: 2.1, z: 0}
 --- !u!114 &686180178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2543,7 +2543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -6.6, y: 2.07}
+  m_AnchoredPosition: {x: -5.47, y: 2.07}
   m_SizeDelta: {x: 10, y: 5.7636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &687374344
@@ -3441,8 +3441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stickmanPrefab: {fileID: 6328179451365421954, guid: 6008805a0c68846cc8ed8366970dab7c, type: 3}
   statsCanvas: {fileID: 686180176}
-  populationSize: 2
-  GenerationTime: 7
+  populationSize: 20
+  GenerationTime: 15
 --- !u!4 &1096778856
 Transform:
   m_ObjectHideFlags: 0

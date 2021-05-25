@@ -84,7 +84,7 @@ public class Manager : MonoBehaviour {
         // Ittrate over population & create stickmans
         for (int i = 0; i < populationSize; i++)
         {
-            StickmanAI currentStickman = ((GameObject)Instantiate(stickmanPrefab, new Vector3(Random.Range(-10f, 10f), 0, 0), stickmanPrefab.transform.rotation)).GetComponent<StickmanAI>();
+            StickmanAI currentStickman = ((GameObject)Instantiate(stickmanPrefab, new Vector3(0, -1, 0), stickmanPrefab.transform.rotation)).GetComponent<StickmanAI>();
             currentStickman.Init(nets[i]);
             stickmanList.Add(currentStickman);
         }

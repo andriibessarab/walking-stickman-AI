@@ -7,9 +7,10 @@ public class StickmanAI : MonoBehaviour {
     public GameObject head, torso, lowerTorso, leftLeg, rightLeg, leftKnee, rightKnee; // body parts
 
     private bool initilized = false; // initialization state
+    private bool fell = false;
     private Vector3 initialPosition; // initial position
 
-    public float speed = 5f; // speed
+    public float speed = 80f; // speed
     private Color color; // color
 
     private NeuralNetwork net; // neural network
@@ -62,8 +63,8 @@ public class StickmanAI : MonoBehaviour {
             *    - height (excluding head; i.o. maxJointY)
 		    *    - x velocity
 		    *    - y velocity
-		    *    - angular velocity
-		    *    - creature rotation
+		    *    - z angular velocity
+		    *    - z creature rotation
 		    */
 
             // Brain inputs
@@ -124,14 +125,36 @@ public class StickmanAI : MonoBehaviour {
             }
 
             // Handle fitness
-            net.SetFitness(head.transform.position.x - initialPosition.x);
+            if (fell) {
+                net.SetFitness(0);
+            } 
+            else {
+                 net.SetFitness(head.transform.position.x - initialPosition.x);
+            }
+
+            nets = manager.GetComponent<Manager>().GetNeuralNetworks();
+            nets.Sort((a, b) => b.CompareTo(a)); // sort nets by fitness
+
+            int stickmanRank = nets.IndexOf(net); // get stickman's rank
+
+            // Show only if has the best fitness
+            if (stickmanRank == 0 && !fell)
+            {
+                camera.GetComponent<FollowTarget>().SetTarget(head.GetComponent<Transform>()); // set camera to follow this stickman
+            }
         }
 	}
 
     // If stickman fell, start next generation
     public void Fell()
     {
-        // TODO
+        fell = true; // set fell to true
+
+        foreach(GameObject i in bodyParts) {
+            i.GetComponent<Renderer>().enabled = false; // hide body part
+            i.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
     }
 
     // Initialize
