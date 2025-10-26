@@ -2,8 +2,8 @@
 [attr]lfs filter=lfs diff=lfs merge=lfs -text
 * text=auto eol=lf
 *.cs text diff=csharp
-*.cginc text
-*.shader text
+*.cginc text linguist-vendored
+*.shader text linguist-vendored
 *.meta unityyaml
 *.unity unityyaml
 *.prefab unityyaml
