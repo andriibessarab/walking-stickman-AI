@@ -1,0 +1,48 @@
+[attr]unityyaml merge=unityyamlmerge diff -text
+[attr]lfs filter=lfs diff=lfs merge=lfs -text
+* text=auto eol=lf
+*.cs text diff=csharp
+*.cginc text
+*.shader text
+*.meta unityyaml
+*.unity unityyaml
+*.prefab unityyaml
+*.asset unityyaml
+*.mat unityyaml
+*.anim unityyaml
+*.controller unityyaml
+*.overrideController unityyaml
+*.physicMaterial unityyaml
+*.physicsMaterial2D unityyaml
+*.playable unityyaml
+*.mask unityyaml
+*.guiskin unityyaml
+*.flare unityyaml
+*.jpg lfs
+*.jpeg lfs
+*.png lfs
+*.gif lfs
+*.psd lfs
+*.tga lfs
+*.exr lfs
+*.mp3 lfs
+*.wav lfs
+*.ogg lfs
+*.aif lfs
+*.mp4 lfs
+*.mov lfs
+*.avi lfs
+*.wmv lfs
+*.fbx lfs
+*.obj lfs
+*.blend lfs
+*.3ds lfs
+*.dae lfs
+*.ttf lfs
+*.otf lfs
+*.unitypackage lfs
+*.dll lfs
+*.zip lfs
+*-[Tt]errain.asset lfs
+*-[Nn]av[Mm]esh.asset lfs
+*Oc
