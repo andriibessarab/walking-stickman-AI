@@ -21,7 +21,7 @@ learning. I made this project to explore basic artificial Intelligence and machi
 | **Engine & Language**   | **Unity (C#)**            | Built the entire simulation environment, physics model, and core AI logic in C#.                                                    |
 | **ML Model**            | **Custom Neural Network** | Implemented a fully custom, feed-forward network from scratch to directly control joint rotation angles.                            |
 | **AI Technique**        | **Genetic Algorithm**     | Drove the learning process through selection, crossover, and mutation of the network's weights, optimizing for distance traveled.   |
-| **Activation Function** | *($\text{Tanh}$)*         | Used for non-linear neuron activation, crucial for complex movement control.                                                        |
+| **Activation Function** | *_Tanh_*         | Used for non-linear neuron activation, crucial for complex movement control.                                                        |
 
 ### **The Learning Process**
 
